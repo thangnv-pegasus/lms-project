@@ -1,35 +1,42 @@
 FROM php:8.3.9-fpm
 
-# Install common php extension dependencies
+# install package
 RUN apt-get update && apt-get install -y \
-    libfreetype-dev \
-    libjpeg62-turbo-dev \
     libpng-dev \
-    zlib1g-dev \
+    libjpeg-dev \
+    libfreetype6-dev \
     libzip-dev \
+    libpq-dev \
+    libonig-dev \
+    libxml2-dev \
     unzip \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install -j$(nproc) gd \
-    && docker-php-ext-install zip
+    && docker-php-ext-install gd zip pdo pdo_mysql pdo_pgsql bcmath \
+    && docker-php-ext-install mysqli \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Set the working directory
-COPY . /var/www/app
-WORKDIR /var/www/app
+# setup Composer
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-RUN chown -R www-data:www-data /var/www/app \
-    && chmod -R 775 /var/www/app/storage \
-    && chown -R www-data:www-data /var/www/app/bootstrap/cache \
-    && chmod -R 775 /var/www/app/bootstrap/cache
+# setup working directory
+WORKDIR /var/www
 
-# install composer
-COPY --from=composer:2.6.5 /usr/bin/composer /usr/local/bin/composer
+# copy code to folder /var/www
+COPY . /var/www
 
-# copy composer.json to workdir & install dependencies
-COPY composer.json ./
-COPY composer.lock ./
-RUN composer install
+# setup package laravel
+RUN composer install --prefer-dist --no-scripts --no-dev --optimize-autoloader || true
 
-expose 8989
+# change mode to folder
+RUN chown -R www-data:www-data /var/www \
+    && chown -R www-data:www-data /var/www/storage \
+    && chown -R www-data:www-data /var/www/bootstrap/cache \
+    && chmod -R 777 /var/www/storage \
+    && chmod -R 775 /var/www/bootstrap/cache \
+    && chmod -R 775 /var/www/storage/logs
 
-# Set the default command to run php-fpm
+# define port php listen
+EXPOSE 9898
+
+# running php-fpm
 CMD ["php-fpm"]
