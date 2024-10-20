@@ -15,17 +15,17 @@ return new class extends Migration
             $table->unsignedBigInteger('id')->autoIncrement();
             $table->string('full_name');
             $table->string('email',100)->unique();
-            $table->string('phone',10)->nullable();
-            $table->string('address');
-            $table->string('password',50);
+            $table->string('phone',20)->nullable();
+            $table->string('address')->nullable();
+            $table->string('password',255);
             $table->tinyInteger('gender')->default(3); // 1-male, 2-female, 3-other
             $table->date('dob');
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->unsignedBigInteger('class_id');
-            $table->unsignedBigInteger('province_id');
-            $table->unsignedBigInteger('district_id');
-            $table->unsignedBigInteger('ward_id');
+            $table->unsignedBigInteger('province_id')->nullable();
+            $table->unsignedBigInteger('district_id')->nullable();
+            $table->unsignedBigInteger('ward_id')->nullable();
             $table->tinyInteger('role')->default(4); // 1-admin, 2-super teacher, 3-teacher, 4-student
             $table->timestamps();
         });

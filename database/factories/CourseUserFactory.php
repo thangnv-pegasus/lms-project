@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Course;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,8 +18,13 @@ class CourseUserFactory extends Factory
      */
     public function definition(): array
     {
+
+        $user = User::inRandomOrder()->first();
+        $course = Course::inRandomOrder()->first();
         return [
-            //
+            'user_id' => $user->id,
+            'course_id' => $course->id,
+            'role' => fake()->numberBetween(1, 2)
         ];
     }
 }
