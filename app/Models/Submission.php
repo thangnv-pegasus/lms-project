@@ -15,7 +15,7 @@ class Submission extends Model
         'user_id',
         'exercise_id',
         'file_path',
-        'score'
+        'score',
     ];
 
     public function exercise(): BelongsTo

@@ -32,7 +32,7 @@ class User extends Authenticatable
         'province_id',
         'district_id',
         'ward_id',
-        'role'
+        'role',
     ];
 
     /**

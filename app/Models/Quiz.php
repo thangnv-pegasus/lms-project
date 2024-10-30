@@ -15,7 +15,7 @@ class Quiz extends Model
     protected $fillable = [
         'name',
         'slug',
-        'lesson_task_id'
+        'lesson_task_id',
     ];
 
     public function task(): BelongsTo

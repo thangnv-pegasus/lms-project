@@ -17,7 +17,7 @@ class Course extends Model
         'name',
         'slug',
         'member_count',
-        'department_id'
+        'department_id',
     ];
 
     public function users(): BelongsToMany

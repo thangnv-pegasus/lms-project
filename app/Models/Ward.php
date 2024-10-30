@@ -13,7 +13,7 @@ class Ward extends Model
 
     protected $fillable = [
         'name',
-        'district_id'
+        'district_id',
     ];
 
     public function district(): BelongsTo

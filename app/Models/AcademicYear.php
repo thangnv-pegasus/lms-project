@@ -16,7 +16,7 @@ class AcademicYear extends Model
         'slug',
         'start_year',
         'end_year',
-        'status'
+        'status',
     ];
 
     public function classes(): HasMany

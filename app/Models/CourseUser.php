@@ -16,7 +16,7 @@ class CourseUser extends Model
     protected $fillable = [
         'user_id',
         'course_id',
-        'role'
+        'role',
     ];
 
     public function user(): BelongsTo

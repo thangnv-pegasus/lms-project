@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->unsignedBigInteger('id')->autoIncrement();
             $table->string('full_name');
-            $table->string('email',100)->unique();
-            $table->string('phone',20)->nullable();
+            $table->string('email', 100)->unique();
+            $table->string('phone', 20)->nullable();
             $table->string('address')->nullable();
-            $table->string('password',255);
+            $table->string('password', 255);
             $table->tinyInteger('gender')->default(3); // 1-male, 2-female, 3-other
             $table->date('dob');
             $table->timestamp('email_verified_at')->nullable();

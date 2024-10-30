@@ -21,10 +21,11 @@ class CourseUserFactory extends Factory
 
         $user = User::inRandomOrder()->first();
         $course = Course::inRandomOrder()->first();
+
         return [
             'user_id' => $user->id,
             'course_id' => $course->id,
-            'role' => fake()->numberBetween(1, 2)
+            'role' => fake()->numberBetween(1, 2),
         ];
     }
 }

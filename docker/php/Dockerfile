@@ -22,7 +22,7 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 WORKDIR /var/www
 
 # copy code to folder /var/www
-COPY . /var/www
+COPY ../. /var/www
 
 # setup package laravel
 RUN composer install --prefer-dist --no-scripts --no-dev --optimize-autoloader || true
@@ -36,7 +36,7 @@ RUN chown -R www-data:www-data /var/www \
     && chmod -R 775 /var/www/storage/logs
 
 # define port php listen
-EXPOSE 9898
+EXPOSE 9000
 
 # running php-fpm
 CMD ["php-fpm"]

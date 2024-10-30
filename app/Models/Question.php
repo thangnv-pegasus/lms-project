@@ -14,7 +14,7 @@ class Question extends Model
 
     protected $fillable = [
         'name',
-        'slug'
+        'slug',
     ];
 
     public function answer(): HasMany

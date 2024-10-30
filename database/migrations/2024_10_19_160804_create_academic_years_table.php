@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('academic_years', function (Blueprint $table) {
             $table->unsignedBigInteger('id')->autoIncrement();
-            $table->string('name',50)->unique();
-            $table->string('slug','100')->unique();
+            $table->string('name', 50)->unique();
+            $table->string('slug', '100')->unique();
             $table->year('start_year');
             $table->year('end_year');
             $table->tinyInteger('status')->default(1); // 1-active, 2-inactive

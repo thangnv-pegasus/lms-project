@@ -17,7 +17,7 @@ class Exercise extends Model
         'slug',
         'content',
         'lesson_task_id',
-        'due_date'
+        'due_date',
     ];
 
     public function task(): BelongsTo

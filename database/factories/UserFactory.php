@@ -25,6 +25,7 @@ class UserFactory extends Factory
     public function definition(): array
     {
         $class = Classes::inRandomOrder()->first();
+
         return [
             'full_name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
@@ -35,7 +36,7 @@ class UserFactory extends Factory
             'gender' => fake()->numberBetween(1, 3),
             'dob' => fake()->date(),
             'role' => fake()->numberBetween(1, 4),
-            'class_id' => $class->id
+            'class_id' => $class->id,
         ];
     }
 
@@ -44,7 +45,7 @@ class UserFactory extends Factory
      */
     public function unverified(): static
     {
-        return $this->state(fn(array $attributes) => [
+        return $this->state(fn (array $attributes) => [
             'email_verified_at' => null,
         ]);
     }

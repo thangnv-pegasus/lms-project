@@ -34,9 +34,9 @@ class FetchDistricts extends Command
         foreach ($provinces as $key => $province) {
             $provinceId = $province->id;
             if ($province->id < 10) {
-                $provinceId = '0' . $province->id;
+                $provinceId = '0'.$province->id;
             }
-            $url = getenv('SUPPERSHIP_API_AREA_URL') . '/district?province=' . $provinceId;
+            $url = getenv('SUPPERSHIP_API_AREA_URL').'/district?province='.$provinceId;
 
             $response = Http::get($url);
 

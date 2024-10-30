@@ -16,7 +16,7 @@ class QuizQuestion extends Model
     protected $fillable = [
         'score',
         'question_id',
-        'quiz_id'
+        'quiz_id',
     ];
 
     public function quiz(): BelongsTo

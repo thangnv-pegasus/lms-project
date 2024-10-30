@@ -19,10 +19,11 @@ class LessonFactory extends Factory
     public function definition(): array
     {
         $name = fake()->unique()->sentence(3);
+
         return [
             'name' => $name,
             'slug' => Str::slug($name),
-            'course_id' => Course::inRandomOrder()->first()->id
+            'course_id' => Course::inRandomOrder()->first()->id,
         ];
     }
 }

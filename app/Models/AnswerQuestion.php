@@ -14,7 +14,7 @@ class AnswerQuestion extends Model
     protected $fillable = [
         'name',
         'question_id',
-        'is_correct'
+        'is_correct',
     ];
 
     public function question(): BelongsTo

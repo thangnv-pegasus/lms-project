@@ -15,7 +15,7 @@ class Lesson extends Model
     protected $fillable = [
         'name',
         'slug',
-        'course_id'
+        'course_id',
     ];
 
     public function course(): BelongsTo
