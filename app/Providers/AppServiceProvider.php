@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use App\Services\Auth\AuthInterface;
 use App\Services\Auth\AuthService;
+use App\Services\Course\CourseService;
+use App\Services\Course\CourseServiceInterface;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,7 +15,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->bind(AuthInterface::class,AuthService::class);
+        $this->app->bind(AuthInterface::class, AuthService::class);
+        $this->app->bind(CourseServiceInterface::class, CourseService::class);
     }
 
     /**

@@ -2,10 +2,9 @@
 
 namespace App\Services\Auth;
 
-
 use App\Repositories\AuthRepository;
 
-class AuthService implements  AuthInterface
+class AuthService implements AuthInterface
 {
     protected $authRepository;
 

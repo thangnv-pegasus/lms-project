@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -14,7 +15,7 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, HasApiTokens;
+    use HasApiTokens, HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -37,8 +38,11 @@ class User extends Authenticatable
     ];
 
     const ROLE_ADMIN = 1;
+
     const ROLE_DEPARTMENT = 2;
+
     const ROLE_TEACHER = 3;
+
     const ROLE_USER = 4;
 
     /**
@@ -92,5 +96,10 @@ class User extends Authenticatable
     public function class(): BelongsTo
     {
         return $this->belongsTo(Classes::class);
+    }
+
+    public function department(): HasOneThrough
+    {
+        return $this->hasOneThrough(Department::class, Classes::class, 'id', 'id', 'class_id', 'department_id');
     }
 }

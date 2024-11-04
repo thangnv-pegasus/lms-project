@@ -15,7 +15,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id')->autoIncrement();
             $table->string('name')->unique();
             $table->string('slug')->unique();
-            $table->integer('memeber_count')->default(1);
+            $table->integer('member_count')->default(1);
             $table->unsignedBigInteger('department_id');
             $table->timestamps();
         });

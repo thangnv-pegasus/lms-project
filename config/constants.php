@@ -21,6 +21,10 @@ return [
         500 => [
             'http_status' => \Symfony\Component\HttpFoundation\Response::HTTP_INTERNAL_SERVER_ERROR,
             'msg' => 'Server error',
-        ]
-    ]
+        ],
+    ],
+    'pagination' => [
+        'default_limit' => 12,
+        'first_page' => 1,
+    ],
 ];

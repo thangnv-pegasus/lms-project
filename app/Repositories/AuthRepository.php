@@ -3,12 +3,9 @@
 namespace App\Repositories;
 
 use App\Models\User;
-use App\Repositories\BaseRepository;
-use Illuminate\Database\Eloquent\Model;
 
 class AuthRepository extends BaseRepository
 {
-
     public function getModel()
     {
         return User::class;

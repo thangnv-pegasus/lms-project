@@ -21,11 +21,11 @@ class UserResource extends JsonResource
             'phone' => $this->address,
             'gender' => $this->gender,
             'dob' => $this->dob,
-            'class' => $this->class ? new ClassResource($this->class) : null ,
-            "province_id" => $this->province,
-            "district_id" => $this->district,
-            "ward_id" => $this->ward,
-            "role" => $this->role,
+            'class' => $this->class ? new ClassResource($this->class) : null,
+            'province_id' => $this->province,
+            'district_id' => $this->district,
+            'ward_id' => $this->ward,
+            'role' => $this->role,
         ];
     }
 }

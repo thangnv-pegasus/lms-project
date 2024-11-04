@@ -202,7 +202,7 @@ abstract class BaseRepository
 
     public function delete(array $ids): bool
     {
-        return $this->model->whereIn($this->model->getKeyName(), $ids);
+        return $this->model->whereIn($this->model->getKeyName(), $ids)->delete();
     }
 
     protected function updateTimestamp($data, $columns = ['created_at', 'updated_at'])
@@ -215,5 +215,10 @@ abstract class BaseRepository
         }
 
         return $data;
+    }
+
+    public function create(array $attributes)
+    {
+        return $this->model->create($attributes);
     }
 }
