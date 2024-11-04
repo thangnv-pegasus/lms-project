@@ -9,11 +9,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasApiTokens;
 
     /**
      * The attributes that are mass assignable.
@@ -34,6 +35,11 @@ class User extends Authenticatable
         'ward_id',
         'role',
     ];
+
+    const ROLE_ADMIN = 1;
+    const ROLE_DEPARTMENT = 2;
+    const ROLE_TEACHER = 3;
+    const ROLE_USER = 4;
 
     /**
      * The attributes that should be hidden for serialization.
@@ -81,5 +87,10 @@ class User extends Authenticatable
     public function submissions(): HasMany
     {
         return $this->hasMany(Submission::class);
+    }
+
+    public function class(): BelongsTo
+    {
+        return $this->belongsTo(Classes::class);
     }
 }

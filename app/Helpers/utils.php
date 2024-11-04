@@ -1,7 +1,5 @@
 <?php
 
-namespace App\Helpers;
-
 use Illuminate\Support\Facades\Storage;
 
 function responseBase($http_status, $data = [], $msg = '', $pagination = null)
@@ -18,17 +16,12 @@ function responseBase($http_status, $data = [], $msg = '', $pagination = null)
     return response()->json($result, $http_status);
 }
 
-function responseError($code, $data = new stdClass())
+function responseError($code, $data = new stdClass(), string $msg = '')
 {
-    $api_errors = config('constants.api_errors');
-
-    $msg = $api_errors[$code]['msg'];
-    $http_status = $api_errors[$code]['http_status'];
-
-    return responseBase($http_status, $data, $msg);
+    return responseBase($code, $data, $msg);
 }
 
-function responseOK($data = new stdClass(), $pagination = null, $msg = '成功。')
+function responseOK($data = new stdClass(), $pagination = null, $msg = 'successed')
 {
     return responseBase(200, $data, $msg, $pagination);
 }
@@ -189,37 +182,11 @@ function findUserValueByKey($key, $label, $collection) {
     switch ($key) {
         case 'created_at';
             return $firstItem?->created_at ?? '';
-        case 'code';
         case 'status';
-        case 'cancelled_at';
-            return $firstItem?->user?->$key ?? '';
-        case 'form_id';
-            return $firstItem?->form_key?->form?->id ?? '';
-        case 'form_name';
-            return $firstItem?->form_key?->form?->name ?? '';
-        case 'event_id';
-            return $firstItem?->form_key?->form?->event?->id ?? '';
         case 'first_name';
         case 'last_name';
-        case 'first_name_furi';
-        case 'last_name_furi';
         case 'email';
-        case 'code_customer';
-        case 'affiliated_organization_name';
-        case 'post_code';
-        case 'address_below';
-        case 'source_of_seminar_other';
-        case 'number_dog';
-        case 'number_cat';
-        case 'is_annual_sales';
-        case 'question';
-            return $collection?->first(function($item) use ($key) {
-                return $item?->form_key?->key?->key === $key;
-            })?->value ?? '';
         case 'address';
-        case 'status_rcp';
-        case 'register_class';
-        case 'is_shell';
         case 'pro_club_registration_status';
             $userValue = $collection?->first(function($item) use ($key) {
                 return $item?->form_key?->key?->key === $key;
@@ -228,10 +195,6 @@ function findUserValueByKey($key, $label, $collection) {
             return $userValue?->form_key?->key?->keys->first(function($item) use ($value) {
                 return $item->id == $value;
             })?->name ?? '';
-        case 'source_of_seminar_royal_canin_email';
-        case 'source_of_seminar_sales_info';
-        case 'source_of_seminar_external_communication';
-        case 'source_of_seminar_internal_info';
         case 'source_of_seminar_is_other';
             $key = 'source_of_seminar';
             $userValuesSelected = $collection?->filter(function($item) use ($key) {
@@ -411,9 +374,4 @@ function checkElementContainInArray($collection1, $collection2) {
     return $collection1->every(function ($value) use ($collection2) {
         return $collection2->contains($value);
     });
-}
-
-function authKite()
-{
-    return auth()->guard('kite')->user();
 }

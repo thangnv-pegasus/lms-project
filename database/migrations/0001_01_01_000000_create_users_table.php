@@ -26,7 +26,7 @@ return new class extends Migration
             $table->unsignedBigInteger('province_id')->nullable();
             $table->unsignedBigInteger('district_id')->nullable();
             $table->unsignedBigInteger('ward_id')->nullable();
-            $table->tinyInteger('role')->default(4); // 1-admin, 2-super teacher, 3-teacher, 4-student
+            $table->tinyInteger('role')->default(4); // 1-admin, 2-department, 3-teacher, 4-student
             $table->timestamps();
         });
 

@@ -22,7 +22,7 @@ abstract class BaseRepository
         $this->setPrimaryKey();
     }
 
-    public function getModel(): Model
+    public function getModel()
     {
         return $this->model;
     }
@@ -72,7 +72,7 @@ abstract class BaseRepository
         return $this->model->whereIn($this->model->getKeyName(), $ids)->get();
     }
 
-    public function filters($conditions, $returnEntity = false): Collection
+    public function filters($conditions, $returnEntity = false)
     {
         if (empty($conditions['select'])) {
             $selectable = $this->model->selectable ?? ['*'];
