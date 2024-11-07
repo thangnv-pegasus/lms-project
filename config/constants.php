@@ -27,4 +27,17 @@ return [
         'default_limit' => 12,
         'first_page' => 1,
     ],
+    'users' => [
+        'gender' => [
+            'male' => 1,
+            'female' => 2,
+            'other' => 3,
+        ],
+        'role' => [
+            'admin' => 1,
+            'department' => 2,
+            'teacher' => 3,
+            'student' => 4
+        ]
+    ]
 ];

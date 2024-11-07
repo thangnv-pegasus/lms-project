@@ -23,7 +23,7 @@ function responseError($code, $data = new stdClass, string $msg = '')
 
 function responseOK($data = new stdClass, $pagination = null, $msg = 'successed')
 {
-    return responseBase(200, $data, $msg, $pagination);
+    return responseBase(\Symfony\Component\HttpFoundation\Response::HTTP_OK, $data, $msg, $pagination);
 }
 
 function storagePath($path)

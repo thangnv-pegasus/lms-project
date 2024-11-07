@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CourseResource extends JsonResource
+class ExerciseResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -18,9 +18,9 @@ class CourseResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'slug' => $this->slug,
-            'memeber_count' => $this->member_count,
-            'department' => $this->whenLoaded('department', $this->department->name) ?? null,
-            'lesson' => $this->whenLoaded('lessons', new LessonCollectionResource($this->lessons)) ?? null,
+            'content' => $this->content,
+            'due_date' => $this->due_date,
+            'lesson_task_id' => $this->lesson_task_id
         ];
     }
 }

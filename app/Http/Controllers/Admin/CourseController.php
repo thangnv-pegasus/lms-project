@@ -33,7 +33,7 @@ class CourseController extends Controller
     {
         $attributes = $request->validated();
 
-        if (! $course = $this->courseService->store($attributes)) {
+        if (!$course = $this->courseService->create($attributes)) {
             return responseError(Response::HTTP_INTERNAL_SERVER_ERROR);
         }
 
@@ -44,7 +44,7 @@ class CourseController extends Controller
     {
         $course = $this->courseService->show($id);
 
-        if (! $course) {
+        if (!$course) {
             return responseError(Response::HTTP_NOT_FOUND);
         }
 
@@ -55,7 +55,7 @@ class CourseController extends Controller
     {
         $attributes = $request->validated();
 
-        if (! $course = $this->courseService->update($attributes, $request->route('id'))) {
+        if (!$course = $this->courseService->update($request->route('id'), $attributes)) {
             return responseError(Response::HTTP_INTERNAL_SERVER_ERROR);
         }
 
@@ -66,7 +66,7 @@ class CourseController extends Controller
     {
         $ids = $request->ids;
 
-        if (! $this->courseService->delete($ids)) {
+        if (!$this->courseService->delete($ids)) {
             return responseError(Response::HTTP_INTERNAL_SERVER_ERROR);
         }
 

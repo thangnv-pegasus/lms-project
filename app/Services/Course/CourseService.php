@@ -19,19 +19,19 @@ class CourseService extends BaseService implements CourseServiceInterface
         return $this->courseRepository->filters($conditions);
     }
 
-    public function store(array $data)
+    public function create(array $attribute)
     {
-        return $this->courseRepository->create($data);
+        return $this->courseRepository->create($attribute);
     }
 
-    public function show(int $id)
+    public function show($id)
     {
         return $this->courseRepository->find($id);
     }
 
-    public function update(array $data, $id)
+    public function update($id, $attribute)
     {
-        return $this->courseRepository->update($id, $data);
+        return $this->courseRepository->update($id, $attribute);
     }
 
     public function delete(array $ids)

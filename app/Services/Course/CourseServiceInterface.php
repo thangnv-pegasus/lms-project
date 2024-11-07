@@ -2,13 +2,9 @@
 
 namespace App\Services\Course;
 
-interface CourseServiceInterface
+use App\Services\BaseServiceInterface;
+
+interface CourseServiceInterface extends BaseServiceInterface
 {
-    public function getAll($conditions);
 
-    public function store(array $data);
-
-    public function update(array $data, int $id);
-
-    public function delete(array $ids);
 }
