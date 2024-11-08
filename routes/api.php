@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\User\UserSubmissionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CourseController;
@@ -66,16 +67,30 @@ Route::prefix('departments')->group(function () {
 
 Route::prefix('students')->group(function () {
     Route::prefix('courses')->group(function () {
-
+        Route::get('/',[\App\Http\Controllers\User\UserCourseController::class, 'index']);
+        Route::get('/{course}',[\App\Http\Controllers\User\UserCourseController::class, 'show']);
+        Route::post('/',[\App\Http\Controllers\User\UserCourseController::class, 'store']);
     });
 
-
     Route::prefix('exercise')->group(function () {
+        Route::get('/',[\App\Http\Controllers\User\UserExerciseController::class, 'index']);
+        Route::get('/{exercise}',[\App\Http\Controllers\User\UserExerciseController::class, 'show']);
+    });
 
+    Route::prefix('submission')->group(function () {
+       Route::get('',[UserSubmissionController::class, 'index']);
+       Route::post('/',[UserSubmissionController::class,'store']);
     });
 });
 
 Route::prefix('auth')->group(function () {
     Route::post('/login', [\App\Http\Controllers\Admin\AuthController::class, 'login']);
     Route::post('/forget-password', [\App\Http\Controllers\Admin\AuthController::class, 'forget-password']);
+
+    Route::middleware('auth:sanctum')->group(function () {
+        Route::patch('/me',[\App\Http\Controllers\Admin\AuthController::class, 'updateProfile']);
+        Route::get('/me',[\App\Http\Controllers\Admin\AuthController::class, 'me']);
+        Route::patch('/change-password',[\App\Http\Controllers\Admin\AuthController::class,'changePassword']);
+    });
 });
+

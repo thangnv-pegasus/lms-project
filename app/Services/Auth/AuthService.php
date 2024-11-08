@@ -17,4 +17,10 @@ class AuthService implements AuthInterface
     {
         return $this->authRepository->filters($data);
     }
+
+    public function updateProfile($data)
+    {
+        return $this->authRepository->update(auth()->id(), $data);
+    }
+
 }
