@@ -81,7 +81,7 @@ Route::prefix('students')->group(function () {
        Route::get('',[UserSubmissionController::class, 'index']);
        Route::post('/',[UserSubmissionController::class,'store']);
     });
-});
+})->middleware(['auth:sanctum']);
 
 Route::prefix('auth')->group(function () {
     Route::post('/login', [\App\Http\Controllers\Admin\AuthController::class, 'login']);

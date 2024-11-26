@@ -10,4 +10,9 @@ class CourseRepository extends BaseRepository
     {
         return Course::class;
     }
+
+    public function myCourses(array $conditions)
+    {
+        return auth()->user();
+    }
 }

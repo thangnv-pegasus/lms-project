@@ -38,4 +38,9 @@ class CourseService extends BaseService implements CourseServiceInterface
     {
         return $this->courseRepository->delete($ids);
     }
+
+    public function myCourses(array $conditions)
+    {
+        return $this->courseRepository->myCourses($conditions);
+    }
 }
